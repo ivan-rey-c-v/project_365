@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react'
 
 function useIsPerformant() {
+	/*	react's hooks api
+			isPerformant defaults to true
+			setIsPerformant modifies the <isPerformant>
+	*/
 	const [isPerformant, setIsPerformant] = useState(true)
-	// use Date.now() instead of + new Date()
-	const [lastTimestamp, setLastTimestamp] = useState(Date.now())
 
-	useEffect(() => {
+	useEffect(function() {
+		let lastTimestamp = Date.now()
+
 		function perfCheck() {
-			var difference = Date.now() - lastTimestamp
-			setLastTimestamp(Date.now())
+			let difference = Date.now() - lastTimestamp
+			lastTimestamp = Date.now()
 			/**
 			 * Compares the execution of requestAnimationFrame to it's ideal, 60fps.
 			 * When Javascript is performant, the difference should approach 16ms.
