@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import LeftSection from './components/LeftSection'
+import RightSection from './components/RightSection'
+import BottomSection from './components/BottomSection'
 
 class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<h1>Hello from react!</h1>
+				<LeftSection />
+				<RightSection />
+				<BottomSection />
 			</div>
 		)
 	}
