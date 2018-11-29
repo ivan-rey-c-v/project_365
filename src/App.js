@@ -1,18 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LeftSection from './components/LeftSection'
 import RightSection from './components/RightSection'
 import BottomSection from './components/BottomSection'
+import useIsPerformant from './hooks/useIsPerformant'
 
-class App extends Component {
-	render() {
-		return (
-			<div className="App">
-				<LeftSection />
-				<RightSection />
-				<BottomSection />
-			</div>
-		)
-	}
+function App(props) {
+	const isPerformant = useIsPerformant()
+
+	return (
+		<div className="App">
+			<LeftSection />
+			<RightSection />
+			<BottomSection />
+		</div>
+	)
 }
 
-export default App
+export default React.memo(App)
