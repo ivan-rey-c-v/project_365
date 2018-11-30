@@ -18,7 +18,7 @@ function RightSection(props) {
 		<div className="right" style={{ backgroundColor: bg ? bg : 'inherit' }}>
 			<div className="inner" style={{ color: color ? color : 'inherit' }}>
 				<img
-					src={img}
+					src={logo}
 					alt="logo"
 					className={`logo #fadeItem  ${props.config && '#hidden'}`}
 					height={height}
