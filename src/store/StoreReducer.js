@@ -12,9 +12,10 @@ function storeReducer(state, action) {
 		}
 
 		case 'SEARCH_PARAM': {
+			const cat = getSearchParam(action.param)
 			return {
 				...state,
-				cat: getSearchParam(action.param)
+				cat: cat ? cat : 'cnn'
 			}
 		}
 

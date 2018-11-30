@@ -4,7 +4,7 @@ import MainImage from './MainImage'
 function LeftSection(props) {
 	return (
 		<div className="left">
-			<MainImage />
+			<MainImage isPerformant={props.isPerformant} />
 		</div>
 	)
 }

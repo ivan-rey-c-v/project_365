@@ -181,3 +181,10 @@ body.in, .fadeItem.in {
   display: none !important;
   opacity: 0 !important;
 }
+
+body {
+  cursor: none
+}
+.cursor {
+  cursor: default
+}

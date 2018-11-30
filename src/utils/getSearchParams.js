@@ -1,11 +1,13 @@
 function getSearchParam(key) {
 	let val = false
-	const keyExist = location.search.indexOf(key) !== -1
+	const keyExist = window.location.search.indexOf(key) !== -1
 	if (keyExist) {
-		val = location.search.split(key + '=')[1]
+		val = window.location.search.split(key + '=')[1]
 	}
 
 	if (val && val.indexOf('&') !== -1) val = val.split('&')[0]
+
+	console.log('search param', val)
 	return val
 }
 

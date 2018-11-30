@@ -1,50 +1,59 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import randomItem from '../utils/randomItem'
 
 function useGetItem(items) {
-	const [itemMeta, setItemMeta] = useState(null)
+	const [itemMeta, setItemMeta] = useState({})
 
-	useEffect(function() {
-		if (items) {
-			function getItem() {
-				const item = randomItem(items)
+	useEffect(
+		function() {
+			if (items) {
+				function getItem() {
+					const item = randomItem(items)
+					console.log({ item })
 
-				let thumbnail = item.links && item.links.thumbnail
-				let img =
-					thumbnail.length && thumbnail[0].href
-						? thumbnail[0].href
-						: ''
-				let {
-					description = '',
-					title = '',
-					date = '',
-					author = ''
-				} = item.meta
+					let thumbnail = item.links && item.links.thumbnail
+					let img =
+						thumbnail && thumbnail.length && thumbnail[0].href
+							? thumbnail[0].href
+							: ''
+					let {
+						description = '',
+						title = '',
+						date = '',
+						author = ''
+					} = item.meta
 
-				description =
-					description.length > 400
-						? `${description.substring(0, 400)}...`
-						: description
+					description =
+						description.length > 400
+							? `${description.substring(0, 400)}...`
+							: description
 
-				if (title.includes('CNN Video')) return getItem()
-				if (!img || !title) return getItem()
+					if (title.includes('CNN Video')) return getItem()
+					if (!img || !title) return getItem()
 
-				setItemMeta({
-					img,
-					description,
-					title,
-					date,
-					author
-				})
+					const meta = {
+						img,
+						description,
+						title,
+						date,
+						author
+					}
+					console.log({ meta })
+
+					setItemMeta(meta)
+				}
+
+				getItem()
+				const duration = 15000 * 1000
+				const timer = setInterval(getItem, duration)
+
+				return () => {
+					clearInterval(timer)
+				}
 			}
-		}
-
-		const timer = setInterval(getItem, 15 * 1000)
-
-		return () => {
-			clearInterval(timer)
-		}
-	}, [])
+		},
+		[items]
+	)
 
 	return itemMeta
 }
