@@ -65,7 +65,7 @@ function App(props) {
 				isPerformant={isPerformant}
 			/>
 			<RightSection config={store.config} itemMeta={itemMeta} />
-			<BottomSection hidden={store.performanceMode === 'low'} />
+			{/* <BottomSection hidden={store.performanceMode === 'low'} /> */}
 		</div>
 	)
 }

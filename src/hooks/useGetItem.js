@@ -44,7 +44,7 @@ function useGetItem(items) {
 				}
 
 				getItem()
-				const duration = 15000 * 1000
+				const duration = 15 * 1000
 				const timer = setInterval(getItem, duration)
 
 				return () => {
