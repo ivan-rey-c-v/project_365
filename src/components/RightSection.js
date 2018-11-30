@@ -1,5 +1,6 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import moment from 'moment'
+import styled from 'styled-components'
 
 const Container = styled.div`
 	height: 100%;
@@ -7,7 +8,7 @@ const Container = styled.div`
 	padding: 30px;
 	margin-bottom: 30px;
 	color: ${props => (props.color ? props.color : 'inherit')};
-	background-color: ${props => (props.bg ? props.bg : 'tomato')};
+	background-color: ${props => (props.bg ? props.bg : 'inherit')};
 
 	display: flex;
 	flex-direction: column;
@@ -42,10 +43,6 @@ function RightSection(props) {
 		title = ''
 	} = props.itemMeta
 
-	const dateString = ''
-
-	console.log({ bg, logo, author, date, description, img, title })
-
 	return (
 		<Container bg={bg} color={color}>
 			<LogoImage src={logo} alt="logo" height={height} />
@@ -56,7 +53,7 @@ function RightSection(props) {
 					: description}
 			</Desc>
 			<Meta className="meta small #fadeItem">
-				{`${dateString}${author && ` - ${author}`} `}
+				{`${moment(date).fromNow()}${author && ` - ${author}`} `}
 			</Meta>
 		</Container>
 	)

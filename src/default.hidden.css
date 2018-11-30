@@ -1,0 +1,193 @@
+@keyframes kenburns {
+	0% {
+			opacity: 0;
+	}
+
+	5% {
+			opacity: 1;
+	}
+
+	95% {
+			transform: scale3d(1.15, 1.15, 1.15) translate3d(-60px, -50px, 0);
+			opacity: 1;
+	}
+
+	100% {
+			transform: scale3d(1.2, 1.2, 1.2) translate3d(-50px, -40px, 0);
+			opacity: 0;
+	}
+}
+
+@keyframes progressbar {
+	0% {
+			width: 0;
+			opacity: 0;
+	}
+
+	1% {
+			opacity: 1;
+	}
+
+	100% {
+			width: 100%;
+	}
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	color: #fff;
+	font-family: Lato, sans-serif;
+	font-weight: 300;
+	background: #000;
+	padding: 50px 60px;
+	transition: opacity 500ms ease;
+	opacity: 0;
+
+	background: rgb(89, 89, 89);
+	background: radial-gradient(circle, rgba(89, 89, 89, 1) 0%, rgba(51, 51, 51, 1) 35%, rgba(0, 0, 0, 1) 100%);
+}
+
+h1 {
+	font-size: 36px;
+}
+
+p {
+	line-height: 1.5;
+	font-size: 24px;
+}
+
+h1,
+.logo,
+p {
+	margin-bottom: 30px;
+}
+
+.left,
+.right {
+	display: inline-block;
+	height: 100vh;
+	width: 50vw;
+}
+
+.left {
+	position: fixed;
+	right: 20vw;
+	width: 80vw;
+	bottom: 0;
+	left: 0;
+	top: 0;
+
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+img.main {
+	/*transition: all 0ms linear;*/
+	transition: opacity 300ms ease;
+	opacity: 0 !important;
+}
+
+.min-size img {
+	/*min-width: 60vw;*/
+	/*min-height: 100vh;*/
+	transition: opacity 300ms ease;
+}
+
+.min-size .tall {
+	min-width: 60vw;
+}
+
+.min-size .wide {
+	min-height: 100vh;
+}
+
+.opaque {
+	opacity: 1 !important;
+}
+
+.constrained .tall {
+	height: 100vh;
+}
+
+.constrained .wide {
+	width: 60vw;
+}
+
+.kb {
+	animation: kenburns 16s infinite forwards linear;
+}
+
+.right {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 60vw;
+	bottom: 0;
+	width: 40vw;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background: #222;
+	padding: 30px;
+}
+
+.right .inner {
+	margin-bottom: 30px;
+}
+
+.progress-bar {
+	display: block;
+	background: #f0f0f0;
+	height: 3px;
+	border: 1px solid #e3e3e3;
+	border-radius: 2px;
+	/*border-top-color: #ccc;*/
+	margin: 0;
+}
+
+.progressbar-animate {
+	animation: progressbar 15s normal forwards linear;
+}
+
+.bottom {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+}
+
+.small {
+	font-size: 16px;
+}
+
+.bigger {
+	transform: scale(1.5);
+}
+
+.fadeItem {
+	transition: all 750ms ease;
+	opacity: 0;
+}
+
+body.in,
+.fadeItem.in {
+	opacity: 1;
+}
+
+.neverhide {
+	opacity: 1 !important;
+}
+
+.hidden {
+	display: none !important;
+	opacity: 0 !important;
+}
