@@ -4,5 +4,5 @@ export default function randomItem(items) {
 
 	// get item which !== null/undefined
 	// may need safeguard against items.every(item => item == null)
-	return item ? item : randomItem(items)
+	return item || !item.error ? item : randomItem(items)
 }

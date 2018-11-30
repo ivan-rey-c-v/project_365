@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import styled from 'styled-components'
+import Transition from 'react-transition-group/Transition'
 
 const Container = styled.div`
 	height: 100%;
@@ -22,6 +23,8 @@ const LogoImage = styled.img`
 const Title = styled.h1`
 	font-size: 36px;
 	margin-bottom: 30px;
+	opacity: 0;
+	animation: fade-in 2000ms ease-in-out forwards;
 `
 const Desc = styled.p`
 	line-height: 1.5;
@@ -43,10 +46,36 @@ function RightSection(props) {
 		title = ''
 	} = props.itemMeta
 
+	const defaultStyle = {
+		transition: `opacity 1000ms ease-in-out`,
+		opacity: 0
+	}
+
+	const transitionStyles = {
+		entering: { opacity: 0 },
+		entered: { opacity: 1 }
+	}
+
 	return (
 		<Container bg={bg} color={color}>
 			<LogoImage src={logo} alt="logo" height={height} />
-			<Title>{title}</Title>
+
+			<Transition in={props.itemMeta.title !== ''} timeout={1000}>
+				{state => {
+					console.log({ state })
+					return (
+						<Title
+							style={{
+								...defaultStyle,
+								...transitionStyles[state]
+							}}
+						>
+							{title}
+						</Title>
+					)
+				}}
+			</Transition>
+
 			<Desc>
 				{description.length > 400
 					? `${description.substring(0, 400)}...`

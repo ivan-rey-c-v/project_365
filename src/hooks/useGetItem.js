@@ -21,10 +21,10 @@ function useGetItem(items) {
 						title = '',
 						date = '',
 						author = ''
-					} = item.meta
+					} = item.meta || {}
 
 					description =
-						description.length > 400
+						description && description.length > 400
 							? `${description.substring(0, 400)}...`
 							: description
 
