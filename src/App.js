@@ -1,18 +1,15 @@
 // Using React 16.7 - @next (with HOOKS API)
 import React, { useReducer, useEffect } from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import AppLayout from './layouts/AppLayout'
 import RightSectionLayout from './layouts/RightSectionLayout'
 import LeftSectionLayout from './layouts/LeftSectionLayout'
-import ProgressLayout from './layouts/ProgressLayout'
 
 import MainImage from './components/MainImage'
 import NewsDisplay from './components/news-display/NewsDisplay'
-import ProgressBar from './components/ProgressBar'
+import Progress from './components/progress/Progress'
 
 import useIsPerformant from './hooks/useIsPerformant'
-import setRandomIndex from './utils/setRandomIndex'
 
 import initialState from './store/initialState'
 import StoreReducer from './store/StoreReducer'
@@ -49,7 +46,6 @@ function App(props) {
 
 	useEffect(function() {
 		let removeBodyCursorTimeout
-
 		window.addEventListener('mousemove', function(e) {
 			clearTimeout(removeBodyCursorTimeout)
 			document.body.classList.add('cursor')
@@ -94,17 +90,7 @@ function App(props) {
 				)}
 			</RightSectionLayout>
 
-			<ProgressLayout>
-				{store.currentItem && (
-					<CSSTransition
-						key={store.currentItemIndex}
-						timeout={15000}
-						classNames="progress"
-					>
-						<ProgressBar />
-					</CSSTransition>
-				)}
-			</ProgressLayout>
+			{store.currentItem && <Progress item={store.currentItem} />}
 		</AppLayout>
 	)
 }

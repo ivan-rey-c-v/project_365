@@ -41,7 +41,6 @@ function storeReducer(state, action) {
 				state.currentItemIndex
 			])
 			const newItem = state.data.items[newIndex]
-			console.log('setting new item', newIndex, newItem, state)
 			return {
 				...state,
 				currentItem: newItem,

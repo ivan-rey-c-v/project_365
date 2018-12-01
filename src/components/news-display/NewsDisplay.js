@@ -33,10 +33,13 @@ function NewsDisplay(props) {
 		title = ''
 	} = props.item.meta
 
+	console.log('rendering news display...')
+
 	return (
 		<StyledTransitionGroup bg={bg} color={color}>
 			<NewsLogo src={logo} alt="logo" height={height} />
 			<CSSTransition
+				appear
 				key={title}
 				timeout={500}
 				classNames="fade"
@@ -45,6 +48,7 @@ function NewsDisplay(props) {
 				<NewsTitle title={title} />
 			</CSSTransition>
 			<CSSTransition
+				appear
 				key={description}
 				timeout={{
 					enter: 300,
