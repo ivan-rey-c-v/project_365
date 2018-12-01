@@ -1,8 +1,13 @@
 // Using React 16.7 - @next (with HOOKS API)
 import React, { useReducer, useEffect } from 'react'
-import LeftSection from './components/LeftSection'
+import { CSSTransition } from 'react-transition-group'
+import RightSectionLayout from './layouts/RightSectionLayout'
+import LeftSectionLayout from './layouts/LeftSectionLayout'
+import ProgressLayout from './layouts/ProgressLayout'
+
+import MainImage from './components/MainImage'
 import NewsDisplay from './components/news-display/NewsDisplay'
-import LoadingBar from './components/LoadingBar'
+import ProgressBar from './components/ProgressBar'
 
 import useIsPerformant from './hooks/useIsPerformant'
 import useGetItem from './hooks/useGetItem'
@@ -57,17 +62,26 @@ function App(props) {
 
 	const itemMeta = useGetItem(store.data.items)
 
+	console.log({ itemMeta })
+
 	return (
 		<div className="App">
-			<LeftSection
-				neverHide={store.performanceMode === 'low'}
-				isPerformant={isPerformant}
-			/>
-			<NewsDisplay config={store.config} itemMeta={itemMeta} />
-			<LoadingBar
-				hidden={store.performanceMode === 'low'}
-				itemMeta={itemMeta}
-			/>
+			<LeftSectionLayout>
+				<MainImage
+					neverHide={store.performanceMode === 'low'}
+					isPerformant={isPerformant}
+				/>
+			</LeftSectionLayout>
+
+			<RightSectionLayout>
+				<CSSTransition>
+					<NewsDisplay config={store.config} itemMeta={itemMeta} />
+				</CSSTransition>
+			</RightSectionLayout>
+
+			<ProgressLayout>
+				<ProgressBar />
+			</ProgressLayout>
 		</div>
 	)
 }

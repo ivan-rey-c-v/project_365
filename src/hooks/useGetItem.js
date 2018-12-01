@@ -9,7 +9,6 @@ function useGetItem(items) {
 			if (items) {
 				function getItem() {
 					const item = randomItem(items)
-					console.log({ item })
 
 					let thumbnail = item.links && item.links.thumbnail
 					let img =
@@ -38,7 +37,6 @@ function useGetItem(items) {
 						date,
 						author
 					}
-					console.log({ meta })
 
 					setItemMeta(meta)
 				}
