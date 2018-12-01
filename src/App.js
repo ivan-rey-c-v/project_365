@@ -1,5 +1,5 @@
 // Using React 16.7 - @next (with HOOKS API)
-import React, { useState, useReducer, useEffect } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import AppLayout from './layouts/AppLayout'
@@ -62,24 +62,17 @@ function App(props) {
 		return () => clearTimeout(removeBodyCursorTimeout)
 	}, [])
 
-	const [currentItemIndex, setCurrentItemIndex] = useState(0)
-	useEffect(
-		function() {
-			if (store.data.items) {
-				const duration = 15 * 1000
-				const max = store.data.items.length
-				const changeItemTimeout = setTimeout(() => {
-					const newIndex = setRandomIndex(0, max, currentItemIndex)
-					setCurrentItemIndex(newIndex)
-					// set new item
-					dispatch({ type: 'SET_ITEM', index: newIndex })
-				}, duration)
+	useEffect(function() {
+		if (store.currentItemIndex) {
+			console.log('start timeout for new item...')
+			const duration = 15 * 1000
+			const changeItemTimeout = setTimeout(() => {
+				dispatch({ type: 'SET_NEW_ITEM' })
+			}, duration)
 
-				return () => clearTimeout(changeItemTimeout)
-			}
-		},
-		[currentItemIndex]
-	)
+			return () => clearTimeout(changeItemTimeout)
+		}
+	})
 
 	return (
 		<AppLayout>
@@ -94,24 +87,17 @@ function App(props) {
 
 			<RightSectionLayout>
 				{store.currentItem && (
-					<CSSTransition
-						in={true}
-						key={currentIndex}
-						timeout={500}
-						classNames="slide-fade"
-					>
-						<NewsDisplay
-							config={store.config}
-							item={store.currentItem}
-						/>
-					</CSSTransition>
+					<NewsDisplay
+						config={store.config}
+						item={store.currentItem}
+					/>
 				)}
 			</RightSectionLayout>
 
 			<ProgressLayout>
 				{store.currentItem && (
 					<CSSTransition
-						key={currentIndex}
+						key={store.currentItemIndex}
 						timeout={15000}
 						classNames="progress"
 					>

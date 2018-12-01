@@ -31,7 +31,7 @@ function NewsDisplay(props) {
 		// use img in left-section
 		img = '',
 		title = ''
-	} = props.item
+	} = props.item.meta
 
 	return (
 		<StyledTransitionGroup bg={bg} color={color}>

@@ -1,6 +1,7 @@
 import lookup from '../utils/lookup'
 import getSearchParam from '../utils/getSearchParams'
-import filterAcceptedItems from '../utils/filterAcceptedItemss'
+import filterAcceptedItems from '../utils/filterAcceptedItems'
+import setRandomIndex from '../utils/setRandomIndex'
 
 function storeReducer(state, action) {
 	switch (action.type) {
@@ -21,23 +22,30 @@ function storeReducer(state, action) {
 		}
 
 		case 'SET_DATA': {
-			let acceptedItems = filterAcceptedItems(action.data.items)
-
+			const acceptedItems = filterAcceptedItems(action.data.items)
+			const newIndex = setRandomIndex(0, acceptedItems.length)
 			return {
 				...state,
 				data: {
-					...actions.data,
+					...action.data,
 					items: acceptedItems
 				},
-				config: lookup[state.cat]
+				config: lookup[state.cat],
+				currentItemIndex: newIndex,
+				currentItem: acceptedItems[newIndex]
 			}
 		}
 
-		case 'SET_ITEM': {
-			const newItem = state.data.items[action.index]
+		case 'SET_NEW_ITEM': {
+			const newIndex = setRandomIndex(0, state.data.items.length, [
+				state.currentItemIndex
+			])
+			const newItem = state.data.items[newIndex]
+			console.log('setting new item', newIndex, newItem, state)
 			return {
 				...state,
-				currentItem: newItem
+				currentItem: newItem,
+				currentItemIndex: newIndex
 			}
 		}
 
