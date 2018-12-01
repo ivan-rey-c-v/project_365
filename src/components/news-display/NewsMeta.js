@@ -11,9 +11,8 @@ const Meta = styled.p`
 `
 
 function NewsMeta({ date, author, ...otherProps }) {
-	let timeSpan = moment(date).fromNow()
-	let authorStr = author ? ` - ${author}` : ''
-	let meta = `${timeSpan}${authorStr}`
+	const authorStr = author ? ` - ${author}` : ''
+	const meta = date ? `${moment(date).fromNow()}${authorStr}` : ''
 
 	return <Meta {...otherProps}>{meta}</Meta>
 }

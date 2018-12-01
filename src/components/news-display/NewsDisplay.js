@@ -40,7 +40,7 @@ function NewsDisplay(props) {
 			<NewsLogo src={logo} alt="logo" height={height} key={logo} />
 			<NewsTitle title={title} key={title} />
 			<NewsDesc description={description} key={description} />
-			<NewsMeta author={author} date={date} key={author} />
+			<NewsMeta author={author} date={date} key={`${date}-${author}`} />
 		</Container>
 	)
 }
