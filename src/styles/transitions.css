@@ -25,5 +25,33 @@
 	opacity: 0;
 }
 
-/*  classNames =  */
+/*  classNames = progress */
+.progress {
+	transform-origin: 0 0;
+}
+.progress-appear {
+	opacity: 0;
+	transform: scaleX(0)
+}
+.progress-enter {
+	opacity: 1;
+	animation: loading 15000ms ease forwards;
+}
+.progress-enter-active {
+	opacity: 1;
+}
+.progress-enter-done {
+	opacity: 1;
+	transform: scaleX(1)
+}
+
+@keyframes loading {
+	from {
+		transform: scaleX(0)
+	}
+	to {
+		transform: scaleX(1)
+	}
+}
+
 

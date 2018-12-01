@@ -2,7 +2,7 @@
 import React, { useReducer, useEffect } from 'react'
 import LeftSection from './components/LeftSection'
 import NewsDisplay from './components/news-display/NewsDisplay'
-import BottomSection from './components/BottomSection'
+import LoadingBar from './components/LoadingBar'
 
 import useIsPerformant from './hooks/useIsPerformant'
 import useGetItem from './hooks/useGetItem'
@@ -56,7 +56,6 @@ function App(props) {
 	}, [])
 
 	const itemMeta = useGetItem(store.data.items)
-	console.log({ itemMeta })
 
 	return (
 		<div className="App">
@@ -65,7 +64,10 @@ function App(props) {
 				isPerformant={isPerformant}
 			/>
 			<NewsDisplay config={store.config} itemMeta={itemMeta} />
-			<BottomSection hidden={store.performanceMode === 'low'} />
+			<LoadingBar
+				hidden={store.performanceMode === 'low'}
+				itemMeta={itemMeta}
+			/>
 		</div>
 	)
 }
