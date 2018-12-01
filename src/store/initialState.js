@@ -10,7 +10,8 @@ export default {
 		// background
 		// src (logo)
 	},
-	mainImageSrc: '',
+	currentItem: null,
+	mainImageSrc: null,
 	performanceMode: null,
 	neverPerformant: null
 }

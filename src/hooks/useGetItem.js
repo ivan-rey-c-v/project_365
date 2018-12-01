@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import randomItem from '../utils/randomItem'
 
 function useGetItem(items) {
-	const [itemMeta, setItemMeta] = useState({})
+	const [itemMeta, setItemMeta] = useState(null)
 
 	useEffect(
 		function() {

@@ -20,7 +20,6 @@ const StyledTransitionGroup = styled(TransitionGroup)`
 
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 `
 
 function NewsDisplay(props) {
@@ -32,7 +31,7 @@ function NewsDisplay(props) {
 		// use img in left-section
 		img = '',
 		title = ''
-	} = props.itemMeta
+	} = props.item
 
 	return (
 		<StyledTransitionGroup bg={bg} color={color}>

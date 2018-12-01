@@ -1,6 +1,8 @@
 // Using React 16.7 - @next (with HOOKS API)
-import React, { useReducer, useEffect } from 'react'
-import { CSSTransition } from 'react-transition-group'
+import React, { useState, useReducer, useEffect } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+
+import AppLayout from './layouts/AppLayout'
 import RightSectionLayout from './layouts/RightSectionLayout'
 import LeftSectionLayout from './layouts/LeftSectionLayout'
 import ProgressLayout from './layouts/ProgressLayout'
@@ -10,7 +12,7 @@ import NewsDisplay from './components/news-display/NewsDisplay'
 import ProgressBar from './components/ProgressBar'
 
 import useIsPerformant from './hooks/useIsPerformant'
-import useGetItem from './hooks/useGetItem'
+import setRandomIndex from './utils/setRandomIndex'
 
 import initialState from './store/initialState'
 import StoreReducer from './store/StoreReducer'
@@ -38,51 +40,86 @@ function App(props) {
 	}, [])
 
 	useEffect(function() {
-		const timer = setTimeout(function() {
+		const reloadPageTimeout = setTimeout(function() {
 			window.location.reload(true)
 		}, 60 * 60 * 1000)
 
-		return () => clearTimeout(timer)
+		return () => clearTimeout(reloadPageTimeout)
 	}, [])
 
 	useEffect(function() {
-		let timer
+		let removeBodyCursorTimeout
 
 		window.addEventListener('mousemove', function(e) {
-			clearTimeout(timer)
+			clearTimeout(removeBodyCursorTimeout)
 			document.body.classList.add('cursor')
 
-			timer = setTimeout(() => {
+			removeBodyCursorTimeout = setTimeout(() => {
 				document.body.classList.remove('cursor')
 			}, 5 * 1000)
 		})
 
-		return () => clearTimeout(timer)
+		return () => clearTimeout(removeBodyCursorTimeout)
 	}, [])
 
-	const itemMeta = useGetItem(store.data.items)
+	const [currentItemIndex, setCurrentItemIndex] = useState(0)
+	useEffect(
+		function() {
+			if (store.data.items) {
+				const duration = 15 * 1000
+				const max = store.data.items.length
+				const changeItemTimeout = setTimeout(() => {
+					const newIndex = setRandomIndex(0, max, currentItemIndex)
+					setCurrentItemIndex(newIndex)
+					// set new item
+					dispatch({ type: 'SET_ITEM', index: newIndex })
+				}, duration)
 
-	console.log({ itemMeta })
+				return () => clearTimeout(changeItemTimeout)
+			}
+		},
+		[currentItemIndex]
+	)
 
 	return (
-		<div className="App">
+		<AppLayout>
 			<LeftSectionLayout>
-				<MainImage
-					neverHide={store.performanceMode === 'low'}
-					isPerformant={isPerformant}
-				/>
+				{store.currentItem && (
+					<MainImage
+						neverHide={store.performanceMode === 'low'}
+						isPerformant={isPerformant}
+					/>
+				)}
 			</LeftSectionLayout>
 
 			<RightSectionLayout>
-				<CSSTransition>
-					<NewsDisplay config={store.config} itemMeta={itemMeta} />
-				</CSSTransition>
+				{store.currentItem && (
+					<CSSTransition
+						in={true}
+						key={currentIndex}
+						timeout={500}
+						classNames="slide-fade"
+					>
+						<NewsDisplay
+							config={store.config}
+							item={store.currentItem}
+						/>
+					</CSSTransition>
+				)}
 			</RightSectionLayout>
 
 			<ProgressLayout>
-				<ProgressBar />
+				{store.currentItem && (
+					<CSSTransition
+						key={currentIndex}
+						timeout={15000}
+						classNames="progress"
+					>
+						<ProgressBar />
+					</CSSTransition>
+				)}
 			</ProgressLayout>
-		</div>
+		</AppLayout>
 	)
 }
 

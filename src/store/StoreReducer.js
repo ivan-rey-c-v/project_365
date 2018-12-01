@@ -1,5 +1,6 @@
 import lookup from '../utils/lookup'
 import getSearchParam from '../utils/getSearchParams'
+import filterAcceptedItems from '../utils/filterAcceptedItemss'
 
 function storeReducer(state, action) {
 	switch (action.type) {
@@ -20,10 +21,23 @@ function storeReducer(state, action) {
 		}
 
 		case 'SET_DATA': {
+			let acceptedItems = filterAcceptedItems(action.data.items)
+
 			return {
 				...state,
-				data: action.data,
+				data: {
+					...actions.data,
+					items: acceptedItems
+				},
 				config: lookup[state.cat]
+			}
+		}
+
+		case 'SET_ITEM': {
+			const newItem = state.data.items[action.index]
+			return {
+				...state,
+				currentItem: newItem
 			}
 		}
 
