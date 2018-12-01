@@ -1,75 +1,19 @@
-/*
-	appear - on page load
-	enter - on component change (start)
-	exit - on component change (end)
- */
-
-/* classNames = fade */
-.fade-appear, .fade-enter  {
-	opacity: 0;
-	z-index: 1;
-}
-.fade-apear-active, .fade-enter-active {
-	opacity: 1;
-	transition: opacity 1000ms linear;
-}
-.fade-exit {
-	opacity: 1;
-}
-.fade-exit.fade-exit-active {
-	display: none;
-	opacity: 0;
-	transition: opacity 200ms linear;
-}
-.fade-exit-done {
-	display: none;
-	opacity: 0;
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
-/*  classNames = progress */
-.progress-enter, .progress-appear {
-	transform: scaleX(0)
-}
-.progress-appear, .progress-appear-active,
-.progress-enter, .progress-enter-active {
-	transition: all 15000ms linear forwards;
-	transform-origin: 0 0;
-}
-.progress-enter-active {
-	transform: scaleX(1)
-}
-.progress-enter-done {
-	transform: scaleX(1)
-}
-.progress-exit {
-	opacity: 0;
-	display: none;
-}
-
-/* classNames - slide-fade */
-
-.slide-fade-appear {
-	opacity: 0;
-	transform: scaleX(0.40);
-	transform-origin: 100 0;
-}
-.slide-fade-appear-active {
-	opacity: 1;
-	transition: all 300ms ease-in-out;
-	transform-origin: 100 0;
-	transform: scaleX(1);
-}
-.slide-fade-enter {
-	opacity: 0;
-}
-.slide-fade-enter-active {
-	opacity: 1;
-	transition: opacity 300ms ease-in-out;
-}
-.slide-fade-exit {
-	opacity: 1;
-}
-.slide-fade-exit-active {
-	opacity: 0;
-	transition: opacity 200ms linear;
+@keyframes slide-left {
+	from {
+		opacity: 1;
+		transform: scaleX(0.75)
+	}
+	to {
+		opacity: 1;
+		transform: scaleX(1)
+	}
 }

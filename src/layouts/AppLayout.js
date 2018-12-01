@@ -5,6 +5,7 @@ const Layout = styled.main`
 	height: 100vh;
 	width: 100vw;
 	display: flex;
+	background-color: gray;
 `
 
 function AppLayout({ children, ...props }) {

@@ -1,15 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import NewsLogo from './NewsLogo'
 import NewsTitle from './NewsTitle'
 import NewsDesc from './NewsDesc'
 import NewsMeta from './NewsMeta'
 
-// TransitionGroup creates a div
-// use TransitionGroup as a container
-const StyledTransitionGroup = styled(TransitionGroup)`
+const Container = styled.div`
 	height: 100%;
 	width: 100%;
 	padding: 30px;
@@ -17,9 +14,12 @@ const StyledTransitionGroup = styled(TransitionGroup)`
 	background-color: ${props => (props.bg ? props.bg : 'inherit')};
 
 	overflow: hidden;
-
 	display: flex;
 	flex-direction: column;
+	opacity: 0;
+	transform-origin: 100% 100%;
+	transition: all 300ms;
+	animation: slide-left 500ms ease-in-out forwards;
 `
 
 function NewsDisplay(props) {
@@ -36,31 +36,12 @@ function NewsDisplay(props) {
 	console.log('rendering news display...')
 
 	return (
-		<StyledTransitionGroup bg={bg} color={color}>
-			<NewsLogo src={logo} alt="logo" height={height} />
-			<CSSTransition
-				appear
-				key={title}
-				timeout={500}
-				classNames="fade"
-				unmountOnExit
-			>
-				<NewsTitle title={title} />
-			</CSSTransition>
-			<CSSTransition
-				appear
-				key={description}
-				timeout={{
-					enter: 300,
-					exit: 2000
-				}}
-				classNames="fade"
-				unmountOnExit
-			>
-				<NewsDesc description={description} />
-			</CSSTransition>
-			<NewsMeta author={author} date={date} />
-		</StyledTransitionGroup>
+		<Container bg={bg} color={color}>
+			<NewsLogo src={logo} alt="logo" height={height} key={logo} />
+			<NewsTitle title={title} key={title} />
+			<NewsDesc description={description} key={description} />
+			<NewsMeta author={author} date={date} key={author} />
+		</Container>
 	)
 }
 
