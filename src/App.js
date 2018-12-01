@@ -5,7 +5,7 @@ import AppLayout from './layouts/AppLayout'
 import RightSectionLayout from './layouts/RightSectionLayout'
 import LeftSectionLayout from './layouts/LeftSectionLayout'
 
-import MainImage from './components/MainImage'
+import MainImage from './components/main-image/MainImage'
 import NewsDisplay from './components/news-display/NewsDisplay'
 import Progress from './components/progress/Progress'
 
@@ -77,6 +77,7 @@ function App(props) {
 					<MainImage
 						neverHide={store.performanceMode === 'low'}
 						isPerformant={isPerformant}
+						item={store.currentItem}
 					/>
 				)}
 			</LeftSectionLayout>

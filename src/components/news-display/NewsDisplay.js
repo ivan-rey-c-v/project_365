@@ -28,8 +28,6 @@ function NewsDisplay(props) {
 		author = '',
 		date = '',
 		description = '',
-		// use img in left-section
-		img = '',
 		title = ''
 	} = props.item.meta
 

@@ -1,6 +1,13 @@
 export default function filterAcceptedItems(items) {
 	return items.filter(item => {
-		if (!item || item.error || !item.meta.title) return false
+		if (
+			!item ||
+			item.error ||
+			!item.meta.title ||
+			item.meta.title.includes('CNN Video')
+		) {
+			return false
+		}
 
 		let thumbnail = item.links && item.links.thumbnail
 		let image =
