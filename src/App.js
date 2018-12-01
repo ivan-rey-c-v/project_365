@@ -1,7 +1,7 @@
 // Using React 16.7 - @next (with HOOKS API)
 import React, { useReducer, useEffect } from 'react'
 import LeftSection from './components/LeftSection'
-import RightSection from './components/RightSection'
+import NewsDisplay from './components/news-display/NewsDisplay'
 import BottomSection from './components/BottomSection'
 
 import useIsPerformant from './hooks/useIsPerformant'
@@ -64,8 +64,8 @@ function App(props) {
 				neverHide={store.performanceMode === 'low'}
 				isPerformant={isPerformant}
 			/>
-			<RightSection config={store.config} itemMeta={itemMeta} />
-			{/* <BottomSection hidden={store.performanceMode === 'low'} /> */}
+			<NewsDisplay config={store.config} itemMeta={itemMeta} />
+			<BottomSection hidden={store.performanceMode === 'low'} />
 		</div>
 	)
 }

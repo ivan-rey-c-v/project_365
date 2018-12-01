@@ -1,0 +1,29 @@
+/*
+	appear - on page load
+
+ */
+
+/* classNames = fade */
+.fade-appear, .fade-enter  {
+	opacity: 0;
+	z-index: 1;
+}
+.fade-apear-active, .fade-enter-active {
+	opacity: 1;
+	transition: opacity 1000ms linear;
+}
+.fade-exit {
+	opacity: 1;
+}
+.fade-exit.fade-exit-active {
+	display: none;
+	opacity: 0;
+	transition: opacity 1000ms linear;
+}
+.fade-exit-done {
+	display: none;
+	opacity: 0;
+}
+
+/*  classNames =  */
+
