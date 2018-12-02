@@ -11,6 +11,14 @@ const Img = styled.img`
 			}
 		}
 	}};
+
+	margin: auto 0;
+	height: auto;
+	max-width: 100%;
+
+	opacity: 0;
+	transition: all 300ms ease-in-out;
+	animation: fade-in 500ms ease-in forwards;
 `
 
 function Image(props) {
@@ -27,26 +35,30 @@ function Image(props) {
 		[imageRef]
 	)
 
-	const handleOnImageLoad = useCallback(function(e) {
-		if (props.isPerformant) {
-			const options = {
-				minScale: 1,
-				width: document.body.clientWidth * 0.6,
-				height: document.body.clientHeight
-			}
-			// todo: how to get image from the imageRef
-			// smartcrop
-			// 	.crop(image, options)
-			// 	.then(result => {
-			// 		if (result && result.topCrop) {
-			// 			setImgCrop(result.topCrop)
-			// 		}
-			// 	})
-			// 	.catch(error => console.log(error))
-		}
-	}, [])
+	const handleOnImageLoad = useCallback(
+		function(e) {
+			if (props.isPerformant && props.href) {
+				const { height, width } = props.containerRef.current
+				const options = {
+					width,
+					height,
+					minScale: 1
+				}
 
-	console.log('img ref', imageRef.current)
+				// TODO: Error in drawing canvas
+				// smartcrop
+				// 	.crop(imageRef, options)
+				// 	.then(result => {
+				// 		if (result && result.topCrop) {
+				// 			setImgCrop(result.topCrop)
+				// 			console.log('setting smartcrop', result.topCrop)
+				// 		}
+				// 	})
+				// 	.catch(error => console.log(error))
+			}
+		},
+		[props.href]
+	)
 
 	return (
 		<Img

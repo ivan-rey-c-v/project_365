@@ -58,17 +58,19 @@ function App(props) {
 		return () => clearTimeout(removeBodyCursorTimeout)
 	}, [])
 
-	useEffect(function() {
-		if (store.currentItemIndex) {
-			console.log('start timeout for new item...')
-			const duration = 15 * 1000
-			const changeItemTimeout = setTimeout(() => {
-				dispatch({ type: 'SET_NEW_ITEM' })
-			}, duration)
+	useEffect(
+		function() {
+			if (store.currentItemIndex) {
+				const duration = 15 * 1000
+				const changeItemTimeout = setTimeout(() => {
+					dispatch({ type: 'SET_NEW_ITEM' })
+				}, duration)
 
-			return () => clearTimeout(changeItemTimeout)
-		}
-	})
+				return () => clearTimeout(changeItemTimeout)
+			}
+		},
+		[store.currentItemIndex]
+	)
 
 	return (
 		<AppLayout>

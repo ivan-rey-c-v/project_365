@@ -19,11 +19,6 @@ body {
 	font-family: Lato, sans-serif;
   font-weight: 300;
 
-  /* padding: 50px 60px;
-  transition: opacity 500ms ease; */
-
-  background: #000;
-  background: rgb(89, 89, 89);
   background: radial-gradient(circle, rgba(89, 89, 89, 1) 0%, rgba(51, 51, 51, 1) 35%, rgba(0, 0, 0, 1) 100%);
 }
 .cursor {

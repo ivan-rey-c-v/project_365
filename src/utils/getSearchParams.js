@@ -7,7 +7,6 @@ function getSearchParam(key) {
 
 	if (val && val.indexOf('&') !== -1) val = val.split('&')[0]
 
-	console.log('search param', val)
 	return val
 }
 
